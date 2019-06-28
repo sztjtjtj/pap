@@ -5,4 +5,3 @@ EXPOSE 80
 
 #拉代码
 COPY . /usr/share/nginx/html
-
