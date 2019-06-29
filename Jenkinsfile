@@ -13,18 +13,19 @@ node {
       sh label: '', script: 'sudo docker build -t tjlabs/pap .'
       echo 'docker images built successfully'
    }
-   stage('DeploySI') {
-      sh label: '', script: 'sudo docker run --name pap-si -d -p 28001:80 tjlabs/pap'
-      echo 'deployed the SI test environment'
-      //sh label: '', script: 'sudo docker images && sudo docker ps'
+   stage('DeployIT') {
+      sh label: '', script: 'sudo docker run --name pap-it -d -p 28001:80 tjlabs/pap'
+      echo 'deployed the Integration test environment'
    }
-   stage('SItest') {
-      echo 'SI tested'
+   stage('Integrationtest') {
+      echo 'Integration tested'
+   }
+   stage('Publish') {
+      echo 'docker push to Docker Registry/Harbor'
    }
    stage('DeployUAT') {
       sh label: '', script: 'sudo docker run --name pap-uat -d -p 28002:80 tjlabs/pap'
       echo 'deployed the UAT test environment'
-      //sh label: '', script: 'sudo docker images && sudo docker ps'
    }
    stage('UATtest') {
       echo 'UAT tested'
@@ -32,7 +33,6 @@ node {
    stage('DeployStage') {
       sh label: '', script: 'sudo docker run --name pap-stage -d -p 28003:80 tjlabs/pap'
       echo 'deployed the Stage test environment'
-      //sh label: '', script: 'sudo docker images && sudo docker ps'
    }
    stage('Stagetest') {
       echo 'Stage tested'
